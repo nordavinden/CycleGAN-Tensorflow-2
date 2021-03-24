@@ -192,7 +192,7 @@ py.mkdir(sample_dir)
 
 # main loop
 with train_summary_writer.as_default():
-    for ep in tqdm.trange(args.epochs, desc='Epoch Loop'):
+    for ep in tqdm.trange(args.epochs, desc='Epoch Loop', bar_format=True):
         if ep < ep_cnt:
             continue
 
@@ -200,7 +200,7 @@ with train_summary_writer.as_default():
         ep_cnt.assign_add(1)
 
         # train for an epoch
-        for A, B in tqdm.tqdm(A_B_dataset, desc='Inner Epoch Loop', total=len_dataset):
+        for A, B in tqdm.tqdm(A_B_dataset, desc='Inner Epoch Loop', total=len_dataset, bar_format=True):
             G_loss_dict, D_loss_dict = train_step(A, B)
 
             # # summary
